@@ -15,10 +15,6 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended:true}))
 
 
-// this will hold all the history
-let resultHistoryArray = [
-   
-];
 
 // serve static files that live in the public folder
 // static files include html, css, client-side JS
@@ -29,26 +25,42 @@ app.use(express.static('server/public'));
 // use on the server
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// this will hold all the history
+let resultHistoryArray = [
+   
+];
+
+
 //server is giving data client is requesting
 app.get('/operations', function(req,res){
     console.log('data is getting to client')
     res.send(resultHistoryArray);
 })
 
+
 //server is (posting) updated data client sent 
 //by storing it in our resultHistory array
 app.post('/operations', function(req,res){
-    console.log('updated data is being stored', req.body)//why req.body
+    console.log('updated data is being stored', req.body)//why req.body= data
+    let equation = req.body;
+   
+    //below we can use equation. since we equaled equation with req.body
+    //which is object that holds our data:numOne, numTwo....
+    equation.answer= Calculation((equation.numOne/1), equation.operator, (equation.numTwo/1))
+    console.log('equation.answer is :' , equation.answer)
+
     resultHistoryArray.push(req.body);
     res.sendStatus(201)
     Calculation() //why do we call it here
 
 })
 
+
+
 //functions for calculations
 
 
-function Calculation() {
+function Calculation(numOne,operator,numTwo) {
 if(operator === '+'){
     return numOne + numTwo;
 }

@@ -6,8 +6,10 @@ function onReady() {
     $('#addInputForm').on('submit', addInput);
     $('#plusBtn').on('click', Addition);
     $('#minusBtn').on('click', Subtraction);
-    $('#multBtn').on('click', Multiplication)
-    $('#divisionBtn').on('click', Division)
+    $('#multBtn').on('click', Multiplication);
+    $('#divisionBtn').on('click', Division);
+   // $('#equalBtn').on('click', Equal);
+    $('#clearBtn').on('click', Clear);
     getInput();
 }
 
@@ -68,28 +70,42 @@ function renderToDom(resultHistoryArray){ //??
     console.log()
     $('#resultHistory').empty();
     for (result of resultHistoryArray)
-    $('#resultHistory').append(`number1: ${result.numOne} operator ${result.operator} number2 ${result.numTwo} =answer ${result.answer} 
+    $('#resultHistory').append(`<li>${result.numOne} ${result.operator} ${result.numTwo} ${result.answer}</li> 
     `);
 
 
 }
 //this global variable will be updated with each btn function
 let operator = ''
+let answer = ''
 
 //any button in <form> will refresh when we press
 //so we need to make sure we add event.prevent 
-function Addition(){
+function Addition(event){
+    event.preventDefault()
     operator = '+'
 }
 
-function Subtraction(){
+function Subtraction(event){
+    event.preventDefault()
     operator = '-'
 }
-function Multiplication(){
+function Multiplication(event){
+    event.preventDefault()
     operator = '*'
 }
 
-function Division(){
+function Division(event){
+    event.preventDefault()
     operator = '/'
+}
+//function Equal(event){
+//     event.preventDefault()
+//     answer = '='
+// }
+function Clear(event){
+    event.preventDefault()
+    $('#addInputForm').val('')
+    //make sure to set the array to 0
 }
 
