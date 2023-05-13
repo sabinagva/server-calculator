@@ -14,13 +14,82 @@ function onReady() {
 //Get function
 //client is making a request for data from server
 //by getfunction through ajax
+function getInput() {
+    $.ajax({
+        method: 'GET',
+        url: '/operations'
+    }).then(function(response){ //holding the data we get from server
+        console.log('this is response', response);
+        renderToDom(response) //so it shows it on the dom right when we get data //response will pass the array to the next function
 
-
-
-//RenderToDom: to display html 
-
-
+    }).catch(function(error){ //this will catch any error and show it at the dom
+        alert('request failed!'); 
+        console.log('request failed:', error)
+        console.log(response)
+    })
+}
 
 //Add function which holds post in it
 //Client is posting updated data to server
 //so server can hold on to it(list items)
+//MAKE OPERATOR EQUAL TO DATA
+
+function addInput(event){
+    event.preventDefault();
+//set inputs to var
+const numOne = $('#inputOne').val()
+const numTwo= $('#inputTwo').val()
+//clear inputs
+$('#inputOne').val('')
+$('#inputTwo').val('')
+    $.ajax({
+        method: 'POST',
+        url: '/operations',
+        data: {
+            numOne: numOne,
+            operator: operator,
+            numTwo: numTwo,
+            answer: ''
+        }
+    }).then(function(response){ //when in post we dont need to worry about response
+        console.log('yay it works')
+        getInput() ///??
+    }).catch(function(error){
+        alert('error with client post');
+        console.log('error with post', error)
+    })
+}
+
+
+
+
+//RenderToDom: to display result history to dom 
+function renderToDom(resultHistoryArray){ //??
+    console.log()
+    $('#resultHistory').empty();
+    for (result of resultHistoryArray)
+    $('#resultHistory').append(`number1: ${result.numOne} operator ${result.operator} number2 ${result.numTwo} =answer ${result.answer} 
+    `);
+
+
+}
+//this global variable will be updated with each btn function
+let operator = ''
+
+//any button in <form> will refresh when we press
+//so we need to make sure we add event.prevent 
+function Addition(){
+    operator = '+'
+}
+
+function Subtraction(){
+    operator = '-'
+}
+function Multiplication(){
+    operator = '*'
+}
+
+function Division(){
+    operator = '/'
+}
+
