@@ -8,7 +8,6 @@ function onReady() {
     $('#minusBtn').on('click', Subtraction);
     $('#multBtn').on('click', Multiplication);
     $('#divisionBtn').on('click', Division);
-   // $('#equalBtn').on('click', Equal);
     $('#clearBtn').on('click', Clear);
     getInput();
 }
@@ -41,6 +40,8 @@ function addInput(event){
 //set inputs to var
 const numOne = $('#inputOne').val()
 const numTwo= $('#inputTwo').val()
+
+
 //clear inputs
 $('#inputOne').val('')
 $('#inputTwo').val('')
@@ -64,20 +65,23 @@ $('#inputTwo').val('')
 
 
 
-
 //RenderToDom: to display result history to dom 
 function renderToDom(resultHistoryArray){ //??
-    console.log()
     $('#resultHistory').empty();
     for (result of resultHistoryArray)
-    $('#resultHistory').append(`<li>${result.numOne} ${result.operator} ${result.numTwo} ${result.answer}</li> 
+    $('#resultHistory').append(`<li>${result.numOne} ${result.operator} ${result.numTwo} = ${result.answer}</li> 
     `);
+  console.log('answer is',`${result.answer}` )
+  $('#recentAnswer').text(`${result.answer}`)
 
 
 }
+
 //this global variable will be updated with each btn function
 let operator = ''
-let answer = ''
+
+
+
 
 //any button in <form> will refresh when we press
 //so we need to make sure we add event.prevent 
@@ -99,13 +103,11 @@ function Division(event){
     event.preventDefault()
     operator = '/'
 }
-//function Equal(event){
-//     event.preventDefault()
-//     answer = '='
-// }
+//we need to request server to set the history array to 0
 function Clear(event){
     event.preventDefault()
     $('#addInputForm').val('')
-    //make sure to set the array to 0
+    
+    
 }
 
