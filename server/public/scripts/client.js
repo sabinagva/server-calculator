@@ -40,8 +40,6 @@ function addInput(event){
 //set inputs to var
 const numOne = $('#inputOne').val()
 const numTwo= $('#inputTwo').val()
-
-
 //clear inputs
 $('#inputOne').val('')
 $('#inputTwo').val('')
@@ -62,9 +60,6 @@ $('#inputTwo').val('')
         console.log('error with post', error)
     })
 }
-
-
-
 //RenderToDom: to display result history to dom 
 function renderToDom(resultHistoryArray){ //??
     $('#resultHistory').empty();
@@ -76,13 +71,8 @@ function renderToDom(resultHistoryArray){ //??
 
 
 }
-
 //this global variable will be updated with each btn function
 let operator = ''
-
-
-
-
 //any button in <form> will refresh when we press
 //so we need to make sure we add event.prevent 
 function Addition(event){

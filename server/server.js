@@ -7,14 +7,11 @@ const app = express();
 // identify which port we'll run on
 const PORT = 5000;
 
-
 // bring body-parser into our project
 const bodyParser = require('body-parser'); 
 
 // This must be added before GET & POST routes.
 app.use(bodyParser.urlencoded({extended:true}))
-
-
 
 // serve static files that live in the public folder
 // static files include html, css, client-side JS
@@ -26,17 +23,14 @@ app.use(express.static('server/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // this will hold all the history
-let resultHistoryArray = [
-   
+let resultHistoryArray = [  
 ];
-
 
 //server is giving data client is requesting
 app.get('/operations', function(req,res){
     console.log('data is getting to client')
     res.send(resultHistoryArray);
 })
-
 
 //server is (posting) updated data client sent 
 //by storing it in our resultHistory array
@@ -55,10 +49,7 @@ app.post('/operations', function(req,res){
 
 })
 
-
-
 //functions for calculations
-
 
 function Calculation(numOne,operator,numTwo) {
 if(operator === '+'){
