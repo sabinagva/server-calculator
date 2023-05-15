@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 
 // identify which port we'll run on
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // bring body-parser into our project
 const bodyParser = require('body-parser'); 
@@ -40,6 +40,7 @@ app.post('/operations', function(req,res){
    
     //below we can use equation. since we equaled equation with req.body
     //which is object that holds our data:numOne, numTwo....
+    //we are solving for answer
     equation.answer= Calculation((equation.numOne/1), equation.operator, (equation.numTwo/1))
     console.log('equation.answer is :' , equation.answer)
 
