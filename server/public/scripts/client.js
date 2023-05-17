@@ -40,9 +40,7 @@ function addInput(event){
 //set inputs to var
 const numOne = $('#inputOne').val()
 const numTwo= $('#inputTwo').val()
-//clear inputs
-$('#inputOne').val('')
-$('#inputTwo').val('')
+
     $.ajax({
         method: 'POST',
         url: '/operations',
@@ -96,8 +94,10 @@ function Division(event){
 //we need to request server to set the history array to 0
 function Clear(event){
     event.preventDefault()
-    $('#addInputForm').val('')
-    
+    //clear inputs
+    // if we gonna set val('') we need to target specific input we cant generalize it
+$('#inputOne').val('')
+$('#inputTwo').val('')
     
 }
 
